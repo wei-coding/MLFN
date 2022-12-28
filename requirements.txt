@@ -1,4 +1,3 @@
-tensorflow-gpu
 matplotlib
 seaborn
 imblearn
