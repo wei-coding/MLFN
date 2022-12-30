@@ -7,3 +7,7 @@ ipython
 ipykernel
 jupyter
 Levenshtein
+tensorflow-gpu
+tldextract
+fastapi
+uvicorn
