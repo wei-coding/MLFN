@@ -1,0 +1,6 @@
+sklearn
+pandas
+Levenshtein
+tldextract
+fastapi
+uvicorn
