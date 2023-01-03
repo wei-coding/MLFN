@@ -4,8 +4,12 @@ import pandas as pd
 import requests
 import tldextract
 import re
+import logging
 
 from urllib.parse import urlparse
+
+LOG = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 def is_URL_accessible(url):
     #iurl = url
@@ -49,7 +53,7 @@ def extract_features(url: str) -> pd.DataFrame:
     status, url, page = is_URL_accessible(url)
 
     if not status:
-        print("can't load in the page, result may have errors.")
+        LOG.warning("can't load in the page, result may have errors.")
 
     hostname, domain, path = get_domain(url)
     extracted_domain = tldextract.extract(url)
