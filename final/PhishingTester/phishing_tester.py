@@ -10,6 +10,8 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--url", "-u", type=str)
     group.add_argument("--file", "-f", type=str)
+    group.add_argument("--report", "-r", type=str)
+    parser.add_argument("--threshold", "-t", type=float)
     args = parser.parse_args()
     if args.url:
         print(ml_model.get_phishing_percentage(args.url))
@@ -23,7 +25,14 @@ def main():
         with open(args.file + ".report", "w") as f:
             json.dump(report, f)
         report_arr = np.array(report)
-        print(np.count_nonzero(report_arr > 0.5))
+        print(np.count_nonzero(report_arr >= 0.5))
+    if args.report:
+        with open(args.report) as f:
+            report_arr = np.array(json.load(f))
+            if (args.threshold):
+                print(np.count_nonzero(report_arr >= args.threshold))
+            else:
+                print(np.count_nonzero(report_arr >= 0.5))
 
 if __name__ == "__main__":
     main()
